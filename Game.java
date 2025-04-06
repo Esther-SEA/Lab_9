@@ -19,7 +19,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    //Question 23
+    private Room previousRoom;
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        previousRoom = null;
     }
 
     /**
@@ -35,7 +37,7 @@ public class Game
     private void createRooms()
     {
         Room outside, theater, pub, lab, office;
-      
+                
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
@@ -56,7 +58,18 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-
+        
+        //Question 20-21-22
+        outside.addItem(new Item("statue","10000"));
+        outside.addItem(new Item("bench","50"));
+        
+        theater.addItem(new Item("microphone","0.5"));
+        pub.addItem(new Item("bar counter","800"));
+        lab.addItem(new Item("lab coat","0.2"));
+        
+        office.addItem(new Item("documents","1"));
+        office.addItem(new Item("computer","2"));
+        
         currentRoom = outside;  // start game outside
     }
 
@@ -112,6 +125,9 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if (commandWord.equals("back")){
+            goBack();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -149,18 +165,28 @@ public class Game
 
         String direction = command.getSecondWord();
 
+        //Room item
+        
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-
+        
+        
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
     }
 
+    //Question 23-24-25
+    private void goBack(){
+        currentRoom = previousRoom;
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -176,4 +202,11 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
+    
+    /**
+     * 19. the model view ontroller pattern is a design that separates the software and the user interface.
+     * 20. 
+     */
 }
+

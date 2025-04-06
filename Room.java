@@ -1,6 +1,6 @@
 import java.util.Set;
 import java.util.HashMap;
-
+import java.util.ArrayList;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -19,7 +19,9 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-
+    // Question 20-21: private Item roomItem;
+    private ArrayList<Item> items;
+    
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -30,6 +32,8 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        //Question 22
+        items = new ArrayList<>();
     }
 
     /**
@@ -41,7 +45,22 @@ public class Room
     {
         exits.put(direction, neighbor);
     }
-
+    
+    /**public void setItem(Item item)
+    {
+        this.roomItem = item;
+    }
+    
+    /** Question 20-21 public Item getItem()
+    {
+        return roomItem;
+    }*/
+    
+    //Question 22
+    public void addItem(Item item){
+        items.add(item);
+    }
+    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
@@ -56,10 +75,30 @@ public class Room
      *     You are in the kitchen.
      *     Exits: north west
      * @return A long description of this room
+     *  
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        /**Question 20-21
+        String itemDescription;
+        if(roomItem != null){
+            itemDescription = "There is an item here: " + roomItem.getDescription() + " " + roomItem.getWeight() + "kg";
+        }
+        
+        else {
+            itemDescription = "There are no items here";
+        }*/
+        
+        //Question 22
+        String itemDescription = "There are no items in this room";
+        
+        if(!items.isEmpty()){
+            itemDescription = "Items: ";
+            for(Item item : items){
+                itemDescription += item.getDescription() + " " + item.getWeight() + "kg" + " ";
+            }
+        }
+        return "You are " + description + ".\n" + getExitString() + "\n" + itemDescription;
     }
 
     /**
