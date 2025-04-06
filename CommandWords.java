@@ -13,7 +13,7 @@ public class CommandWords
 {
     // a constant array that holds all valid command words
     private static final String[] validCommands = {
-        "go", "quit", "help", "back"
+        "go", "quit", "help", "back","take","drop", "inventory", "eat"
     };
 
     /**
@@ -31,8 +31,9 @@ public class CommandWords
     public boolean isCommand(String aString)
     {
         for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
+            if(validCommands[i].equals(aString)){
                 return true;
+            }
         }
         // if we get here, the string was not found in the commands
         return false;
@@ -41,12 +42,21 @@ public class CommandWords
     /**
      * Print all valid commands to System.out.
      */
-    public String showAll() 
+    /**
+     * I put it in comments because it didn't show any result
+     * public String showAll() 
     {
         String allCommands = "";
         for(String command: validCommands) {
             allCommands += (""+ command);
         }
         return allCommands;
+    }*/
+    
+    public void showAll(){
+        for (String command: validCommands)
+        {
+            System.out.print(command + " ");
+        }
     }
 }

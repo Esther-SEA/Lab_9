@@ -10,12 +10,12 @@ public class Item
 {
     // instance variables - replace the example below with your own
     private String description;
-    private String weight;
+    private double weight;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String description, String weight)
+    public Item(String description, double weight)
     {
         this.description = description;
         this.weight = weight;
@@ -26,7 +26,7 @@ public class Item
         return description;
     }
     
-    public String getWeight()
+    public double getWeight()
     {
         return weight;
     }

@@ -61,6 +61,23 @@ public class Room
         items.add(item);
     }
     
+    public void removeItem(Item item)
+    {
+        items.remove(item);
+    }
+    
+    public Item findItem (String name)
+    {
+        for (Item item : items)
+        {
+            if (item.getDescription().equals(name))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
